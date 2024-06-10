@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="author" content="Shreethemes" />
+    <meta name="website" content="https://shreethemes.in" />
+    <meta name="email" content="support@shreethemes.in" />
+    <meta name="version" content="1.0.0" />
+    <!-- favicon -->
+    <link href="images/favicon.ico" rel="shortcut icon">
+    <!-- Bootstrap core CSS -->
+    <link href="/css/bootstrap.min.css" type="text/css" rel="stylesheet" />
+    <!--Material Icon -->
+    <link href="/css/materialdesignicons.min.css" rel="stylesheet" type="text/css" />
+    <!-- Custom  Css -->
+    <link href="/css/style.min.css" rel="stylesheet" type="text/css" id="theme-opt" />
+</head>
+<body>
+    <!-- Start Hero -->
+    <section class="bg-home zoom-image d-flex align-items-center">
+        <div class="bg-overlay image-wrap" style="background: url('/images/bg/03.jpg') center;"></div>
+        <div class="bg-overlay bg-gradient-overlay"></div>
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="p-4 bg-white rounded-3 shadow-md mx-auto w-100" style="max-width: 400px;">
+
+                        <!-- Başarı veya hata mesajını göster -->
+                        <% if (typeof msgSuccess !== 'undefined') { %>
+                            <div class="alert alert-success" role="alert">
+                                <%= msgSuccess %>
+                            </div>
+                        <% } %>
+                        <% if (typeof msgError !== 'undefined') { %>
+                            <div class="alert alert-danger" role="alert">
+                                <%= msgError %>
+                            </div>
+                        <% } %>
+
+                        <form method="POST" action="/giris">
+                            <a href="/"><img src="/images/logo-icon-80.png" class="mb-4 d-block mx-auto" alt=""></a>
+                            <h5 class="mb-3">Giriş yap</h5>
+
+                            <div class="form-floating mb-2">
+                                <input name="email" type="email" class="form-control" id="floatingInput" placeholder="E-mail giriniz">
+                                <label for="floatingInput">Email adresi</label>
+                            </div>
+                            <div class="form-floating mb-3">
+                                <input name="password" type="password" class="form-control" id="floatingPassword" placeholder="Şifre giriniz">
+                                <label for="floatingPassword">Şifre</label>
+                            </div>
+
+                            <button class="btn btn-primary w-100" type="submit">Giriş yap</button>
+                        </form>
+                        <a href="/register" class="btn btn-primary w-100 mt-2" type="submit">Üye ol</a>
+                    </div>
+                </div><!--end col-->
+            </div><!--end row-->
+        </div><!--end container-->
+    </section><!--end section-->
+    <!-- ENd Hero -->
+
+    <!-- javascript -->
+    <script src="/js/bootstrap.bundle.min.js"></script>
+    <!-- Icons -->
+    <script src="/js/feather.min.js"></script>
+    <!-- Custom -->
+    <script src="/js/plugins.init.js"></script>
+    <script src="/js/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,46 @@
+<section class="section">
+    <div class="container mt-3">
+        <div class="row g-4">
+            <div class="col-lg-8 col-md-6 col-12">
+                <div class="row">
+                    <% if (books && books.length > 0) { %>      
+                        <% books.forEach(book => { %>
+                        <div class="col-lg-6 col-12">
+                            <div class="card property border-0 shadow position-relative overflow-hidden rounded-3">
+                                <div class="property-image position-relative overflow-hidden shadow">
+                                    <% if (book.volumeInfo.imageLinks && book.volumeInfo.imageLinks.smallThumbnail) { %>
+                                        <img src="<%= book.volumeInfo.imageLinks.smallThumbnail %>" class="img-fluid">
+                                    <% } else { %>
+                                        <p>No image available</p>
+                                    <% } %>
+                                </div>
+                                <div class="card-body content p-4">
+                                    <a class="title fs-5 text-dark fw-medium">
+                                        <%= book.volumeInfo.title %>
+                                    </a>
+                                    <ul class="list-unstyled d-flex justify-content-between mt-2 mb-0">
+                                        <li class="list-inline-item mb-0">
+                                            <p class="fw-small mb-0">
+                                                <%= book.volumeInfo.authors %>
+                                            </p>
+                                        </li>
+                                    </ul>
+                                    <form method="POST" action="/add-favorite">
+                                        <input type="hidden" name="bookId" value="<%= book.id %>">
+                                        <input type="hidden" name="title" value="<%= book.volumeInfo.title %>">
+                                        <input type="hidden" name="authors" value="<%= book.volumeInfo.authors %>">
+                                        <input type="hidden" name="image" value="<%= book.volumeInfo.imageLinks ? book.volumeInfo.imageLinks.smallThumbnail : '' %>">
+                                        <button type="submit" class="btn btn-primary mt-2">Favorilere Ekle</button>
+                                    </form>
+                                </div>
+                            </div><!--end items-->
+                        </div><!--end col-->
+                        <% }); %>
+                    <% } else { %>
+                        <p>No results found.</p>
+                    <% } %>
+                </div><!--end row-->
+            </div><!--end col-->
+        </div><!--end row-->
+    </div><!--end container-->
+</section>

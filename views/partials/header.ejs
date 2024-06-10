@@ -1,0 +1,41 @@
+ <!-- Navbar STart -->
+ <header id="topnav" class="defaultscroll sticky">
+    <div class="container">
+        </a>
+
+        <div class="menu-extras">
+            <div class="menu-item">
+                <a class="navbar-toggle" id="isToggle" onclick="toggleMenu()">
+                    <div class="lines">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
+                </a>
+            </div>
+        </div>
+
+        <ul class="buy-button list-inline mb-0">
+            <% if(!userIN){ %>
+            <li class="list-inline-item ps-1 mb-0">
+                <a href="/giris" class="btn btn-sm btn-icon btn-pills btn-primary"><i data-feather="user"
+                        class="icons"></i></a>
+            </li>
+            <% } else { %>
+            <li class="list-inline-item ps-1 mb-0 me-3">
+                <a href="/profile">Profil</a>
+            </li>
+            <li class="list-inline-item ps-1 mb-0 me-3">
+                <a href="/uyepaneli">Panelim</a>
+            </li>
+            <li class="list-inline-item ps-1 mb-0 me-3">
+                <a href="/logout">Çıkış Yap</a>
+            </li>
+       
+            <% } %>
+        </ul>
+
+
+    </div>
+</header>
+<!-- Navbar End -->

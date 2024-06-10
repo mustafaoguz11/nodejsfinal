@@ -1,0 +1,48 @@
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-12 mt-sm-0 pt-sm-0">
+            <div class="features-absolute">
+                <ul class="nav nav-pills bg-white shadow border-bottom p-3 flex-row d-md-inline-flex nav-justified mb-0 rounded-top-3 position-relative overflow-hidden"
+                    id="pills-tab" role="tablist">
+                    <li class="nav-item m-1">
+                        <a class="nav-link py-2 px-4 rounded-3 fw-medium" id="sold-login" data-bs-toggle="pill"
+                            href="#sold" role="tab" aria-controls="sold" aria-selected="false">
+                            Kitap Ara
+                        </a><!--end nav link-->
+                    </li><!--end nav item-->
+                </ul>
+
+                <div class="tab-content bg-white rounded-bottom-3 rounded-end-3 sm-rounded-0 shadow"
+                    id="pills-tabContent">
+                    <div class="card border-0 tab-pane fade" id="sold" role="tabpanel"
+                        aria-labelledby="sold-login">
+                        <form class="card-body text-start" action="/search" method="GET">
+                            <div class="registration-form text-dark text-start">
+                                <div class="row g-lg-0">
+                                    <div class="col-lg-3 col-md-6 col-12">
+                                        <div class="mb-3 text-start">
+                                            <label class="form-label fs-6">Arama Yap</label>
+                                            <div class="filter-search-form position-relative filter-border">
+                                                <i data-feather="search" class="fea icon-ex-md icons"></i>
+                                                <input name="name" type="text" id="job-keyword"
+                                                    class="form-control filter-input-box bg-light border-0"
+                                                    placeholder="Kitap Ara...">
+                                            </div>
+                                        </div>
+                                    </div><!--end col-->
+
+                                    <div class="col-lg-12 col-md-6 col-12">
+                                        <input type="submit" id="search" name="search" style="height: 48px;"
+                                            class="btn btn-primary searchbtn w-100" value="Search">
+                                    </div><!--end col-->
+                                </div><!--end row-->
+                            </div>
+                        </form><!--end form-->
+                    </div><!--end teb pane-->
+                </div><!--end tab content-->
+
+                 
+            </div>
+        </div><!--end col-->
+    </div><!--end row-->
+</div><!--end container-->

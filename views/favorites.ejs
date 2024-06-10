@@ -1,0 +1,172 @@
+<!doctype html>
+<html lang="tr">
+
+<%- include('./partials/head') %>
+
+<body>
+   <%- include('./partials/header') %>
+
+    <section class="section pt-5">
+  
+    <!-- Header'in hemen altına form ekliyoruz -->
+    <section class="section">
+      <div class="container mt-3">
+        <h3>Add a new Favorite Book</h3>
+        <form action="/addUserFavorite" method="POST">
+          <div class="mb-3">
+            <label for="title" class="form-label">Title</label>
+            <input type="text" class="form-control" id="title" name="title" required>
+          </div>
+          <div class="mb-3">
+            <label for="authors" class="form-label">Authors</label>
+            <input type="text" class="form-control" id="authors" name="authors" required>
+          </div>
+          <button type="submit" class="btn btn-primary">Save</button>
+        </form>
+      </div>
+    </section>
+    
+    <!-- Google Favorites -->
+    <section class="section pt-5">
+      <div class="container mt-3">
+        <div class="row g-4">
+          <div class="col-lg-8 col-md-6 col-12">
+            <div class="row">
+              <p style="text-align: center;">Google Book API Fav Books</p>
+              <% if (googleFavorites && googleFavorites.length > 0) { %>
+                <% googleFavorites.forEach(book => { %>
+                  <div class="col-lg-6 col-12">
+                    <div class="card property border-0 shadow position-relative overflow-hidden rounded-3">
+                      <div class="property-image position-relative overflow-hidden shadow">
+                        <% if (book.image) { %>
+                          <img src="<%= book.image %>" class="img-fluid">
+                        <% } else { %>
+                          <p>No image available</p>
+                        <% } %>
+                      </div>
+                      <div class="card-body content p-4">
+                        <a class="title fs-5 text-dark fw-medium">
+                          <%= book.title %>
+                        </a>
+                        <ul class="list-unstyled d-flex justify-content-between mt-2 mb-0">
+                          <li class="list-inline-item mb-0">
+                            <p class="fw-small mb-0">
+                              <%= book.authors.join(', ') %>
+                            </p>
+                          </li>
+                          <li>
+                            <form action="/deleteGoogleFavorite" method="POST" style="display:inline;">
+                                <input type="hidden" name="bookId" value="<%= book.bookId %>">
+                                <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                            </form>
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                <% }); %>
+              <% } else { %>
+                <p>No favorites found.</p>
+              <% } %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- User Favorites -->
+    <section class="section pt-5">
+      <div class="container mt-3">
+        <div class="row g-4">
+          <div class="col-lg-8 col-md-6 col-12">
+            <div class="row">
+              <p style="text-align: center;">User Fav Books</p>
+              <% if (userFavorites && userFavorites.length > 0) { %>
+                <% userFavorites.forEach((book, index) => { %>
+                  <div class="col-lg-6 col-12">
+                    <div class="card property border-0 shadow position-relative overflow-hidden rounded-3">
+                      <div class="card-body content p-4">
+                        <a class="title fs-5 text-dark fw-medium">
+                          <%= book.title %>
+                        </a>
+                        <ul class="list-unstyled d-flex justify-content-between mt-2 mb-0">
+                          <li class="list-inline-item mb-0">
+                            <p class="fw-small mb-0">
+                              <%= book.authors.join(', ') %>
+                            </p>
+                          </li>
+                          <li>
+                            <form action="/deleteUserFavorite" method="POST" style="display:inline;">
+                                <input type="hidden" name="index" value="<%= index %>">
+                                <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                            </form>
+                          </li>
+                          <li>
+                            <button class="btn btn-primary btn-sm" onclick="showUpdateForm('<%= index %>', '<%= book.title %>', '<%= book.authors.join(', ') %>')">Update</button>
+                          </li>
+                        </ul>
+                        <!-- Puan ve Yorum Alanı -->
+                        <form action="/rateAndReview" method="POST" class="mt-3">
+                          <input type="hidden" name="index" value="<%= index %>">
+                          <input type="hidden" name="authors" value="<%= book.authors.join(', ') %>">
+                          <div class="mb-3">
+                            <label for="rating" class="form-label">Rating</label>
+                            <input type="number" class="form-control" id="rating" name="rating" min="1" max="5" value="<%= book.rating || 0 %>" required>
+                          </div>
+                          <div class="mb-3">
+                            <label for="review" class="form-label">Review</label>
+                            <textarea class="form-control" id="review" name="review" rows="3"><%= book.review %></textarea>
+                          </div>
+                          <button type="submit" class="btn btn-success btn-sm">Submit</button>
+                        </form>
+                      </div>
+                    </div>
+                  </div>
+                <% }); %>
+              <% } else { %>
+                <p>No favorites found.</p>
+              <% } %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Update Form Modal -->
+    <div class="modal fade" id="updateFormModal" tabindex="-1" aria-labelledby="updateFormModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="updateFormModalLabel">Update Favorite Book</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <form action="/updateUserFavorite" method="POST">
+              <input type="hidden" id="updateIndex" name="index">
+              <div class="mb-3">
+                <label for="updateTitle" class="form-label">Title</label>
+                <input type="text" class="form-control" id="updateTitle" name="title" required>
+              </div>
+              <div class="mb-3">
+                <label for="updateAuthors" class="form-label">Authors</label>
+                <input type="text" class="form-control" id="updateAuthors" name="authors" required>
+              </div>
+              <button type="submit" class="btn btn-primary">Save changes</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <%- include('partials/script') %>
+    <script>
+      function showUpdateForm(index, title, authors) {
+        document.getElementById('updateIndex').value = index;
+        document.getElementById('updateTitle').value = title;
+        document.getElementById('updateAuthors').value = authors;
+        var updateFormModal = new bootstrap.Modal(document.getElementById('updateFormModal'), {});
+        updateFormModal.show();
+      }
+    </script>
+</body>
+</html>

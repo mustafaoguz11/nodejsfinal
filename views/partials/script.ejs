@@ -1,0 +1,82 @@
+  <!-- JAVASCRIPTS -->
+  <script src="js/bootstrap.bundle.min.js"></script>
+  <!-- Tiny slider -->
+  <script src="js/tiny-slider.js"></script>
+  <script src="js/easy_background.js"></script>
+  <!-- Tobii -->
+  <script src="js/tobii.min.js"></script>
+  <!-- Choice js -->
+  <script src="js/choices.min.js"></script>
+  <!-- Icons -->
+  <script src="js/feather.min.js"></script>
+  <!-- Custom -->
+  <script src="js/plugins.init.js"></script>
+  <script src="js/app.js"></script>
+
+  <script>
+      easy_background("#hero-images",
+          {
+              slide: ["images/bg/01.jpg", "images/bg/02.jpg", "images/bg/03.jpg"],
+              delay: [10000, 10000, 10000]
+          }
+      );
+  </script>
+
+  
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/sweetalert2.min.css">
+<style>
+    /* Özel stiller */
+.swal2-popup {
+    font-size: 1.2em;
+    border-radius: 10px;
+    background-color: rgb(0, 59, 94);
+    border: 2px solid #04003a;
+    color:white;
+}
+
+.swal2-confirm {
+    background-color: #4CAF50; /* Arka plan rengi */
+    color: white !important; /* Metin rengi */
+    border: none; /* Kenarlık yok */
+    border-radius: 5px; /* Köşe yuvarlama */
+    padding: 10px 20px; /* Dolgu */
+}
+
+.swal2-confirm:hover {
+    background-color: #45a049; /* Fare üzerine gelindiğinde arka plan rengi */
+}
+</style>
+
+
+<% if(msgSuccess){ %>
+    <script>
+      // msgSuccess değişkeninizin değerini alın
+      var msgSuccess = "<%= msgSuccess %>";
+    
+      // Eğer msgSuccess değişkeni boş değilse ve içeriği varsa SweetAlert2 ile bildirim göster
+      if (msgSuccess) {
+        Swal.fire({
+          icon: 'success', // Bildirim ikonu (success, error, warning, info, vb.)
+          text: msgSuccess, // Bildirim metni (msgSuccess değişkeni)
+        });
+      }
+    </script>
+    
+<% } %>
+
+<% if(msgError){ %>
+    <script>
+        // msgError değişkeninizin değerini alın
+        var msgError = "<%= msgError %>";
+
+        // Eğer msgError değişkeni boş değilse ve içeriği varsa SweetAlert2 ile hata bildirimi göster
+        if (msgError) {
+            Swal.fire({
+                icon: 'error', // Bildirim ikonu (error)
+                text: msgError, // Bildirim metni (msgError değişkeni)
+            });
+        }
+    </script>
+
+<% } %>
